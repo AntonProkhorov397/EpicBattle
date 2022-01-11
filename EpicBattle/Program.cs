@@ -1,39 +1,30 @@
-﻿using System;
-
+using System;
+using System.IO;
 namespace EpicBattle
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string[] heroes = { "Dr.Strange", "Hog Rider", "Buster", "Leon" };
-            string[] villains = { "Nekoglai", "Putin", "IvanZolo2004", "Spike", "SoloZola", "SergejSimonov" };
+            string rootPath = @"C:\Users\opilane\samples\";
+            string[] heroes = GetDataFromFiles(rootPath + "heroes.txt");
+            string[] villians = GetDataFromFiles(rootPath + "villians.txt");
+            string[] weapons = GetDataFromFiles(rootPath + "weapons.txt");
+            //string[] heroes = { "Travis Scotch", "Scooby-Doo", "Sponge Bob", "Patrick" };
+            //string[] villians = { "Plankton", "Hitler", "Nigga from Ghetto", "Mall Security", "That guy" };
 
-            
-
-            
-            string randomHero = GetRandomCharacter(heroes);
-            string randomVillain = GetRandomCharacter(villains);
-            string heroWeapon = GetWeapon();
-            string villainWeapon = GetWeapon();
             Console.WriteLine($"Your random hero is {randomHero}");
-            Console.WriteLine($"Your random villain is {randomVillain}");
-            Console.WriteLine($"{randomHero} with {heroWeapon} will fight {randomVillain} with {villainWeapon}");
+            Console.WriteLine($"Your random hero weapon is {heroweapon}");
+            Console.WriteLine($"Your random villian is {randomvillian}");
+            Console.WriteLine($"Your random  villian weapon is {villiansweapon}");
+
         }
 
-        public static string GetRandomCharacter(string[] someArray)
+        public static string[] GetDataFromFiles(string filepath)
         {
-            return someArray[GetRandomIndexForArray(someArray)];
-        }
-        public static string GetWeapon()
-        {
-            string[] weapon = { "Big pencil", "Molot", "Arm", "Intelect" };
-            return weapon[GetRandomIndexForArray(weapon)];
-        }
-        public static int GetRandomIndexForArray(string[] someArray)
-        {
-            Random rnd = new Random();
-            return rnd.Next(0, someArray.Length);
+            string[] datafromFile = File.ReadAllLines(filepath);
+            return datafromFile;
+
         }
     }
 }
